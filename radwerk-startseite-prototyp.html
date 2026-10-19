@@ -26,6 +26,8 @@
   color-scheme:light;
 }
 @media (min-width:900px){ :root{ --header-h:72px; } }
+section[id],#main{scroll-margin-top:calc(var(--header-h) + var(--space-4))}
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
 
 *{box-sizing:border-box}
 body{margin:0;background:var(--surface-page);color:var(--ink);font:400 16px/26px var(--font-display);-webkit-font-smoothing:antialiased}
