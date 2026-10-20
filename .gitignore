@@ -1,0 +1,43 @@
+# Geheimnisse & Zugangsdaten
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.pfx
+*.p12
+*secret*
+*credentials*
+*.local
+
+# Projektdokumente und lokale Spezifikationen
+*.pdf
+tech-spec.md
+*.code-workspace
+/Radwerk_Mitte_Designvorgaben/design-system.json
+
+# Datenbank- und CMS-Daten (lokal, nicht fürs Repo)
+*.sqlite
+*.sqlite3
+*.db
+/data/
+/uploads/
+/media/
+
+# Abhängigkeiten & Build-Ausgaben
+node_modules/
+dist/
+build/
+.astro/
+.next/
+.cache/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Betriebssystem- und Editor-Dateien
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
