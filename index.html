@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Radwerk Mitte: Dienstrad-Leasing, Werkstattservice und Fahrräder in Kassel und Göttingen.">
+  <meta name="theme-color" content="#1f5fbf">
+  <title>Radwerk Mitte – Dienstrad, Werkstatt und Fahrräder</title>
+<style>
+/* Vorläufige Farb-Arbeitswerte; finale Markenfarben stehen noch aus. */
+:root{
+  --radblau:#1f5fbf; --radblau-dunkel:#174a96; --radblau-tint:#e8effa;
+  --koralle:#ff6b4a; --koralle-dunkel:#e8553a;
+  --nachtblau:#0a1424;
+  --surface-page:#ffffff; --surface-soft:#f3f6fa; --surface-card:#ffffff; --surface-inverse:#0a1424;
+  --ink:#0a1424; --ink-muted:#4a5668;
+  --border:#d5dde8; --border-strong:#8593a8;
+  --interactive:var(--radblau); --on-interactive:#ffffff;
+  --status-ok:#1c7a4b; --status-hinweis:#a34312;
+  --glow-ink:#f1f5fb; --glow-ink-muted:#a9b6c8; --glow-cyan:#5cc8ff; --glow-border:#22324d;
+  --font-display:system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,Consolas,monospace;
+  --radius-sm:8px; --radius-md:14px; --radius-lg:24px; --radius-pill:999px;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-6:24px; --space-8:32px; --space-12:48px; --space-24:96px;
+  --shadow-card:0 1px 2px rgba(10,20,36,.06),0 8px 24px rgba(10,20,36,.08);
+  --shadow-glow:0 0 0 1px rgba(92,200,255,.45),0 0 24px rgba(92,200,255,.35);
+  --shadow-glow-soft:0 0 64px rgba(92,200,255,.18);
+  --container-max:1200px; --text-max:720px; --header-h:60px;
+  color-scheme:light;
+}
+@media (min-width:900px){ :root{ --header-h:72px; } }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-page);color:var(--ink);font:400 16px/26px var(--font-display);-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;font-family:var(--font-display);text-wrap:balance}
+p{margin:0}
+img{max-width:100%}
+a{color:var(--interactive)}
+button{font-family:var(--font-display)}
+.container{max-width:var(--container-max);margin:0 auto;padding-left:max(var(--space-4),env(safe-area-inset-left,0px));padding-right:max(var(--space-4),env(safe-area-inset-right,0px))}
+@media (min-width:900px){ .container{padding-left:max(var(--space-8),env(safe-area-inset-left,0px));padding-right:max(var(--space-8),env(safe-area-inset-right,0px))} }
+
+.skip-link{position:absolute;left:var(--space-4);top:-48px;background:var(--radblau);color:#fff;padding:var(--space-2) var(--space-4);border-radius:var(--radius-sm);z-index:100;transition:top .15s}
+.skip-link:focus{top:var(--space-4)}
+@media (prefers-reduced-motion:reduce){ .skip-link{transition:none} }
+
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid var(--interactive); outline-offset:2px; border-radius:var(--radius-sm);
+}
+a:focus:not(:focus-visible),button:focus:not(:focus-visible){outline:none}
+
+.notice-bar{background:var(--surface-soft);border-bottom:1px solid var(--border);padding-block:var(--space-2)}
+.notice-bar p{font:500 14px/20px var(--font-display);color:var(--ink-muted);text-align:center}
+.notice-bar strong{color:var(--ink)}
+
+header.site{position:sticky;top:0;z-index:50;background:var(--surface-page);border-bottom:1px solid var(--border)}
+.site .container{display:flex;align-items:center;gap:var(--space-6);min-height:var(--header-h)}
+.logo{font:800 20px/1 var(--font-display);color:var(--ink);text-decoration:none;white-space:nowrap}
+.logo b{color:var(--radblau);font-weight:800}
+.site nav{display:none}
+@media (min-width:900px){
+  .site nav{display:flex;gap:var(--space-6);margin-left:var(--space-6)}
+  .site nav a{color:var(--ink);text-decoration:none;font:600 15px/20px var(--font-display)}
+  .site nav a:hover{color:var(--radblau)}
+}
+.header-right{display:flex;align-items:center;gap:var(--space-4);margin-left:auto}
+@media (max-width:480px){ .header-right>.btn{display:none} }
+.phone-chip{display:none;font:500 14px/20px var(--font-display);color:var(--ink-muted);white-space:nowrap}
+@media (min-width:700px){ .phone-chip{display:inline} }
+.ph-flag{font-size:12px;vertical-align:1px}
+
+.menu-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--surface-page);cursor:pointer;flex:none}
+@media (min-width:900px){ .menu-toggle{display:none} }
+.mobile-nav{display:flex;flex-direction:column;gap:var(--space-1);border-top:1px solid var(--border);background:var(--surface-page);padding-block:var(--space-4)}
+.mobile-nav[hidden]{display:none}
+@media (min-width:900px){ .mobile-nav{display:none !important} }
+.mobile-nav a{padding:var(--space-3) var(--space-4);color:var(--ink);text-decoration:none;font:600 15px/20px var(--font-display);border-radius:var(--radius-sm)}
+.mobile-nav a:hover{background:var(--surface-soft)}
+.mobile-nav .phone-mobile{padding:var(--space-3) var(--space-4);font:500 14px/20px var(--font-display);color:var(--ink-muted)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);font:700 16px/20px var(--font-display);border-radius:var(--radius-pill);padding:var(--space-3) var(--space-6);min-height:44px;border:2px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.primary{background:var(--radblau);color:#fff}
+.btn.primary:hover{background:var(--radblau-dunkel)}
+.btn.accent{background:var(--koralle);color:var(--nachtblau)}
+.btn.accent:hover{background:var(--koralle-dunkel)}
+.btn.secondary{background:var(--surface-card);color:var(--ink);border-color:var(--border-strong)}
+.btn.secondary:hover{border-color:var(--ink)}
+.btn.small{padding:var(--space-2) var(--space-4);min-height:36px;font-size:14px}
+
+main{display:block}
+section{padding-block:64px}
+@media (min-width:900px){ section{padding-block:var(--space-24)} }
+.section-soft{background:var(--surface-soft)}
+.section-tint{background:var(--radblau-tint)}
+.section-head{max-width:var(--text-max);margin-bottom:var(--space-12)}
+.eyebrow{display:block;font:600 13px/18px var(--font-display);letter-spacing:.06em;text-transform:uppercase;color:var(--radblau);margin-bottom:var(--space-2)}
+.h2{font-size:24px;line-height:30px;font-weight:700}
+@media (min-width:900px){ .h2{font-size:30px;line-height:36px} }
+.lead{font-size:18px;line-height:27px;color:var(--ink-muted);margin-top:var(--space-3)}
+@media (min-width:900px){ .lead{font-size:19px;line-height:30px} }
+.placeholder-tag{display:inline-block;font:600 12px/16px var(--font-mono);letter-spacing:.04em;color:var(--ink-muted);background:var(--surface-soft);border:1px dashed var(--border-strong);border-radius:var(--radius-sm);padding:2px var(--space-2);margin-left:var(--space-2);white-space:nowrap}
+.section-soft .placeholder-tag,.section-tint .placeholder-tag{background:var(--surface-page)}
+
+/* Hero */
+.hero .container{display:grid;gap:var(--space-8);align-items:center}
+@media (min-width:1000px){ .hero .container{grid-template-columns:1fr 1fr;gap:var(--space-12)} }
+.audience-switch{display:inline-flex;gap:var(--space-2);background:var(--surface-soft);padding:var(--space-1);border-radius:var(--radius-pill);margin-bottom:var(--space-6);flex-wrap:wrap}
+.pill{appearance:none;border:none;background:transparent;border-radius:var(--radius-pill);padding:10px var(--space-4);font:700 14px/18px var(--font-display);color:var(--ink-muted);cursor:pointer;min-height:40px}
+.pill[aria-pressed="true"]{background:var(--radblau);color:#fff}
+.hero h1{font-size:34px;line-height:38px;font-weight:800;letter-spacing:-.01em;margin-bottom:var(--space-4)}
+@media (min-width:900px){ .hero h1{font-size:56px;line-height:60px;letter-spacing:-.02em} }
+.hero .lead{margin-top:0;margin-bottom:var(--space-8);max-width:34ch}
+.hero-ctas{display:flex;gap:var(--space-4);flex-wrap:wrap}
+.photo-ph{background:var(--radblau-tint);border-radius:var(--radius-lg);aspect-ratio:4/3;display:flex;align-items:flex-end;padding:var(--space-4);position:relative;overflow:hidden}
+.photo-ph span{font:500 13px/18px var(--font-display);color:var(--ink-muted);background:rgba(255,255,255,.85);padding:var(--space-1) var(--space-2);border-radius:var(--radius-sm)}
+.photo-ph::before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(45deg,rgba(31,95,191,.06) 0 2px,transparent 2px 14px)}
+
+/* Trust bar */
+.trust-head{text-align:center;font:600 14px/20px var(--font-display);color:var(--ink-muted);margin-bottom:var(--space-6)}
+.trust-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-4);margin-bottom:var(--space-8)}
+.logo-chip{border:1px dashed var(--border-strong);border-radius:var(--radius-sm);padding:var(--space-4);text-align:center;font:600 14px/20px var(--font-display);color:var(--ink-muted);background:var(--surface-page)}
+.fact-row{display:flex;gap:var(--space-8);flex-wrap:wrap;justify-content:center}
+.fact{display:flex;align-items:center;gap:var(--space-2);font:600 15px/22px var(--font-display);color:var(--ink)}
+
+/* Rechner + Glow */
+.calc-grid{display:grid;gap:var(--space-8)}
+.calc-grid>*{min-width:0}
+@media (min-width:900px){ .calc-grid{grid-template-columns:1fr 1fr;align-items:stretch} }
+.calc-card{background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-card);padding:var(--space-8)}
+.field{margin-bottom:var(--space-6)}
+.field label{display:flex;justify-content:space-between;font:600 14px/20px var(--font-display);color:var(--ink);margin-bottom:var(--space-2)}
+.field output{font:700 16px/20px var(--font-mono);color:var(--radblau)}
+input[type="range"]{width:100%;accent-color:var(--radblau)}
+select{width:100%;min-height:44px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);padding:0 var(--space-3);font:500 15px/20px var(--font-display);background:var(--surface-page);color:var(--ink)}
+.field-hint{font:500 13px/18px var(--font-display);color:var(--ink-muted);margin-top:var(--space-6)}
+
+.glow-panel{background:var(--nachtblau);border-radius:var(--radius-lg);padding:var(--space-8);color:var(--glow-ink);
+  --ink:var(--glow-ink); --ink-muted:var(--glow-ink-muted); --interactive:var(--glow-cyan);
+  background-image:linear-gradient(rgba(92,200,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(92,200,255,.08) 1px,transparent 1px);
+  background-size:24px 24px; display:flex; flex-direction:column; gap:var(--space-6); justify-content:center}
+.glow-top{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-6);align-items:center;justify-items:center}
+.glow-data{width:100%;min-width:0}
+@media (min-width:600px){ .glow-top{grid-template-columns:auto minmax(0,1fr);gap:var(--space-8);justify-items:stretch} }
+.ring{width:140px;height:140px;border-radius:50%;box-shadow:var(--shadow-glow-soft);position:relative;flex:none}
+.ring .val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ring b{font:700 32px/1 var(--font-mono);color:var(--glow-cyan)}
+.ring span{font:600 11px/16px var(--font-mono);letter-spacing:.06em;color:var(--glow-ink-muted);margin-top:4px}
+.glow-data{display:flex;flex-direction:column;gap:var(--space-4)}
+.kv{border-left:2px solid var(--glow-cyan);padding-left:var(--space-3)}
+.kv small{display:block;font:600 11px/16px var(--font-mono);letter-spacing:.08em;color:var(--glow-ink-muted)}
+.kv strong{font:700 20px/26px var(--font-mono);font-variant-numeric:tabular-nums}
+.glow-status{border-top:1px solid var(--glow-border);padding-top:var(--space-4);font:600 13px/20px var(--font-mono);display:flex;gap:var(--space-3);align-items:flex-start}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--glow-cyan);box-shadow:var(--shadow-glow);margin-top:6px;flex:none}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:1fr;gap:var(--space-8)}
+@media (min-width:800px){ .steps{grid-template-columns:repeat(4,1fr)} }
+.step-num{width:44px;height:44px;border-radius:50%;background:var(--radblau);color:#fff;display:flex;align-items:center;justify-content:center;font:800 18px/1 var(--font-display);margin-bottom:var(--space-4)}
+.step h3{font-size:18px;line-height:24px;font-weight:700;margin-bottom:var(--space-2)}
+.step p{font:400 15px/22px var(--font-display);color:var(--ink-muted)}
+
+/* Audience cards */
+.cards{display:grid;grid-template-columns:1fr;gap:var(--space-6)}
+.shop-grid{display:grid;grid-template-columns:1fr;gap:var(--space-6)}
+.shop-location{background:var(--surface-page);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--space-6)}
+.shop-location h3{font-size:19px;margin-bottom:var(--space-2)}
+.shop-location p{color:var(--ink-muted);margin-bottom:var(--space-3)}
+@media (min-width:600px){ .shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (min-width:760px){ .cards{grid-template-columns:repeat(3,1fr)} }
+.card{background:var(--surface-soft);border-radius:var(--radius-md);box-shadow:var(--shadow-card);overflow:hidden;display:flex;flex-direction:column}
+.card.b2b{outline:2px solid var(--radblau);outline-offset:-2px}
+.card .photo-ph{border-radius:0;aspect-ratio:16/9}
+.card-body{padding:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2);flex:1}
+.card h3{font-size:19px;line-height:26px;font-weight:700}
+.card p{font:400 15px/22px var(--font-display);color:var(--ink-muted);flex:1}
+.card a{font:700 15px/20px var(--font-display);text-decoration:none}
+.card a:hover{text-decoration:underline}
+
+/* Referenz */
+.quote{max-width:var(--text-max);margin:0 auto;text-align:center}
+.quote blockquote{margin:0;font:600 22px/32px var(--font-display);color:var(--ink)}
+.quote footer{margin-top:var(--space-6);display:flex;align-items:center;justify-content:center;gap:var(--space-3)}
+.avatar-ph{width:44px;height:44px;border-radius:50%;background:var(--surface-page);border:1px dashed var(--border-strong)}
+.quote cite{font:600 14px/20px var(--font-display);color:var(--ink-muted);font-style:normal}
+
+/* Werkstatt & Status */
+.ws-grid{display:grid;gap:var(--space-8)}
+@media (min-width:900px){ .ws-grid{grid-template-columns:1fr 1fr;align-items:start} }
+.mini-steps{list-style:none;margin:0 0 var(--space-6);padding:0;display:flex;flex-direction:column;gap:var(--space-4)}
+.mini-steps li{display:flex;gap:var(--space-3);align-items:flex-start}
+.mini-num{width:28px;height:28px;border-radius:50%;background:var(--radblau-tint);color:var(--radblau);display:flex;align-items:center;justify-content:center;font:800 13px/1 var(--font-display);flex:none}
+.mini-steps p{font:500 15px/22px var(--font-display)}
+
+.status-form{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-bottom:var(--space-4)}
+.status-form .field{flex:1;min-width:180px;margin-bottom:0}
+.status-form input[type="text"]{width:100%;min-height:44px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);padding:0 var(--space-3);font:500 15px/20px var(--font-display)}
+.status-result{min-height:24px}
+.status-line{display:flex;gap:var(--space-2);align-items:center;font:600 15px/22px var(--font-display);padding:var(--space-3) var(--space-4);border-radius:var(--radius-sm);margin-top:var(--space-2)}
+.status-line.ok{color:var(--status-ok);background:#eaf7f0}
+.status-line.hinweis{color:var(--status-hinweis);background:#fdf1ea}
+.status-examples{display:flex;flex-direction:column;gap:var(--space-2);margin-top:var(--space-6)}
+.status-examples p.caption{font:600 13px/18px var(--font-display);color:var(--ink-muted);margin-bottom:var(--space-1)}
+
+/* FAQ */
+.faq{max-width:var(--text-max);margin:0 auto;display:flex;flex-direction:column;gap:var(--space-3)}
+.faq details{background:var(--surface-page);border:1px solid var(--border);border-radius:var(--radius-md);padding:0}
+.faq summary{cursor:pointer;list-style:none;font:700 16px/24px var(--font-display);padding:var(--space-4) var(--space-6);display:flex;justify-content:space-between;align-items:center;gap:var(--space-4)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .chev{flex:none;transition:transform .15s}
+.faq details[open] summary .chev{transform:rotate(180deg)}
+@media (prefers-reduced-motion:reduce){ .faq summary .chev{transition:none} }
+.faq p.answer{margin:0;padding:0 var(--space-6) var(--space-6);color:var(--ink-muted);font-size:15px;line-height:23px}
+
+/* Kontakt */
+.contact-grid{display:grid;gap:var(--space-8)}
+@media (min-width:900px){ .contact-grid{grid-template-columns:1fr 1.3fr} }
+.contact-info{display:flex;flex-direction:column;gap:var(--space-4)}
+.contact-info .fact{font-size:15px}
+form.contact{display:flex;flex-direction:column;gap:var(--space-6);background:var(--surface-soft);padding:var(--space-8);border-radius:var(--radius-md)}
+.form-row{display:grid;gap:var(--space-6)}
+@media (min-width:600px){ .form-row.two{grid-template-columns:1fr 1fr} }
+.form-field label{display:block;font:600 14px/20px var(--font-display);margin-bottom:var(--space-2)}
+.form-field input,.form-field select,.form-field textarea{width:100%;min-height:44px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);padding:var(--space-3);font:400 15px/22px var(--font-display);background:var(--surface-page);color:var(--ink)}
+.form-field textarea{min-height:120px;resize:vertical}
+.req{color:var(--status-hinweis)}
+.consent{display:flex;gap:var(--space-2);align-items:flex-start;font:400 14px/20px var(--font-display);color:var(--ink-muted)}
+.consent input{margin-top:3px}
+.form-note{font:500 13px/18px var(--font-display);color:var(--ink-muted)}
+.confirm{display:none;align-items:center;gap:var(--space-2);background:#fdf1ea;color:var(--status-hinweis);border-radius:var(--radius-sm);padding:var(--space-3) var(--space-4);font:600 14px/20px var(--font-display)}
+.confirm.show{display:flex}
+
+/* Footer */
+footer.site{background:var(--surface-inverse);color:var(--glow-ink)}
+footer.site .container{display:block;min-height:0}
+footer.site a{color:var(--glow-ink)}
+.footer-grid{display:grid;gap:var(--space-8);padding-block:var(--space-12)}
+@media (min-width:800px){ .footer-grid{grid-template-columns:repeat(3,1fr)} }
+footer.site h3{font-size:16px;color:var(--glow-ink);margin-bottom:var(--space-3)}
+footer.site p,footer.site address{font:400 14px/22px var(--font-display);color:var(--glow-ink-muted);font-style:normal;margin:0 0 var(--space-2)}
+footer.site .placeholder-tag{background:transparent;border-color:var(--glow-border);color:var(--glow-ink-muted)}
+.legal-row{display:flex;flex-wrap:wrap;gap:var(--space-6);border-top:1px solid var(--glow-border);padding-block:var(--space-6);font:500 13px/18px var(--font-display);color:var(--glow-ink-muted)}
+.legal-row a{text-decoration:underline}
+.legal-placeholder{border-top:1px solid var(--glow-border);padding-block:var(--space-4);font:400 13px/20px var(--font-display);color:var(--glow-ink-muted)}
+.legal-placeholder p{margin-bottom:var(--space-2)}
+
+.icon{flex:none;width:20px;height:20px}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<div class="notice-bar">
+  <p class="container"><strong>Vorschau</strong> &nbsp;·&nbsp; Markenfarben, Inhalte und Funktionen sind noch nicht final. Rechner, Formular und Statusabfrage sind Beispiele.</p>
+</div>
+
+<header class="site">
+  <div class="container">
+    <a class="logo" href="#main">radwerk <b>mitte</b></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="#arbeitgeber">Für Arbeitgeber</a>
+      <a href="#rechner">Für Beschäftigte</a>
+      <a href="#werkstatt">Werkstatt</a>
+      <a href="#shop">E-Bikes &amp; Shop</a>
+    </nav>
+    <div class="header-right">
+      <span class="phone-chip">Kontaktdaten folgen<span class="placeholder-tag">Platzhalter</span></span>
+      <a class="btn primary small" href="#kontakt">Angebot anfragen</a>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menü öffnen">
+        <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav container" id="mobile-nav" hidden>
+    <a href="#arbeitgeber">Für Arbeitgeber</a>
+    <a href="#rechner">Für Beschäftigte</a>
+    <a href="#werkstatt">Werkstatt</a>
+    <a href="#shop">E-Bikes &amp; Shop</a>
+    <span class="phone-mobile">Kontaktdaten folgen<span class="placeholder-tag">Platzhalter</span></span>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="container">
+      <div>
+        <div class="audience-switch" role="group" aria-label="Zielgruppe wählen">
+          <button type="button" class="pill" aria-pressed="true" data-audience="arbeitgeber">Für Arbeitgeber</button>
+          <button type="button" class="pill" aria-pressed="false" data-audience="beschaeftigte">Für Beschäftigte</button>
+          <button type="button" class="pill" aria-pressed="false" data-audience="privat">Privatkunden</button>
+        </div>
+        <h1 id="hero-heading">Diensträder für Ihr Team.</h1>
+        <p class="lead" id="hero-lead">Wir statten Ihr Team aus – und reparieren vor Ort.</p>
+        <div class="hero-ctas">
+          <a class="btn primary" id="hero-primary" href="#kontakt">Angebot anfragen</a>
+          <a class="btn secondary" href="#ablauf">So funktioniert's</a>
+        </div>
+      </div>
+      <div class="photo-ph" role="img" aria-label="Platzhalterfoto: Übergabe eines Diensträds in der Werkstatt Kassel">
+        <span>Foto: Übergabe in der Werkstatt Kassel — Platzhalter</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-soft" aria-label="Standorte und Service">
+    <div class="container">
+      <div class="fact-row">
+        <span class="fact">
+          <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M4 17c1.2-3 3.4-4.5 6-4.5S14.8 14 16 17"/></svg>
+          2 Standorte mit eigener Werkstatt — Kassel und Göttingen
+        </span>
+        <span class="fact">
+          <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 10l4 4 8-9"/></svg>
+          Persönliche Übergabe vor Ort
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section id="rechner" class="section-page" aria-labelledby="calc-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Leasing-Rechner</span>
+        <h2 class="h2" id="calc-heading">So viel Dienstrad passt in Ihr Budget</h2>
+        <p class="lead">Verschieben Sie den Radpreis und die Laufzeit – die Monatsrate passt sich sofort an.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="field">
+            <label for="radpreis">Radpreis <output id="radpreis-out" for="radpreis">3.200 €</output></label>
+            <input type="range" id="radpreis" min="800" max="6000" step="100" value="3200" aria-describedby="calc-hint">
+          </div>
+          <div class="field">
+            <label for="laufzeit">Laufzeit</label>
+            <select id="laufzeit">
+              <option value="24">24 Monate</option>
+              <option value="36" selected>36 Monate</option>
+              <option value="48">48 Monate</option>
+            </select>
+          </div>
+          <p class="field-hint" id="calc-hint">Platzhalterformel zur Ansicht. Die echten Konditionen liefert Ihr Leasingpartner, sobald sie vorliegen.</p>
+        </div>
+        <div class="glow-panel" data-theme="glow" aria-live="polite">
+          <div class="glow-top">
+            <div class="ring">
+              <svg viewBox="0 0 140 140" width="140" height="140" aria-hidden="true">
+                <circle cx="70" cy="70" r="60" fill="none" stroke="#22324d" stroke-width="10"/>
+                <circle cx="70" cy="70" r="60" fill="none" stroke="#5cc8ff" stroke-width="10" stroke-linecap="round" stroke-dasharray="300 377" transform="rotate(-90 70 70)"/>
+              </svg>
+              <div class="val"><b id="rate-value">37 €</b><span>pro Monat</span></div>
+            </div>
+            <div class="glow-data">
+              <div class="kv"><small>RADPREIS</small><strong id="kv-radpreis">3.200 €</strong></div>
+              <div class="kv"><small>LAUFZEIT</small><strong id="kv-laufzeit">36 Monate</strong></div>
+              <div class="kv"><small>AUFSCHLAG</small><strong>+15 % Platzhalter</strong></div>
+            </div>
+          </div>
+          <div class="glow-status">
+            <span class="dot" aria-hidden="true"></span>
+            <span>Beispielrechnung mit Platzhalterformel · keine bestätigten Leasingkonditionen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ablauf" class="section-soft" aria-labelledby="steps-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Ablauf</span>
+        <h2 class="h2" id="steps-heading">So funktioniert's</h2>
+      </div>
+      <ol class="steps" style="list-style:none;padding:0;margin:0">
+        <li class="step"><div class="step-num">1</div><h3>Anfrage stellen</h3><p>Firmengröße und Bedarf angeben – wir melden uns zeitnah persönlich.</p></li>
+        <li class="step"><div class="step-num">2</div><h3>Angebot erhalten</h3><p>Die konkreten Konditionen werden mit dem Leasingpartner abgestimmt.</p></li>
+        <li class="step"><div class="step-num">3</div><h3>Rad aussuchen</h3><p>Verfügbarkeit und Ablauf werden nach Auswahl des Leasingpartners ergänzt.</p></li>
+        <li class="step"><div class="step-num">4</div><h3>Übergabe vor Ort</h3><p>Die Details zur Übergabe werden noch abgestimmt.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="arbeitgeber" aria-labelledby="audience-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Für Sie</span>
+        <h2 class="h2" id="audience-heading">Direkt zu Ihrem Einstieg</h2>
+      </div>
+      <div class="cards">
+        <div class="card b2b">
+          <div class="photo-ph" role="img" aria-label="Platzhalterfoto: Team eines Klinikums mit Diensträdern"><span>Foto: Team Klinikum mit Diensträdern</span></div>
+          <div class="card-body">
+            <h3>Für Arbeitgeber</h3>
+            <p>Klares Angebot, feste Termine, ein Ansprechpartner vor Ort.</p>
+            <a href="#kontakt">Angebot anfragen →</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="photo-ph" role="img" aria-label="Platzhalterfoto: Pendlerin am Morgen auf dem Dienstrad"><span>Foto: Pendlerin am Morgen</span></div>
+          <div class="card-body">
+            <h3>Für Beschäftigte</h3>
+            <p>Monatsrate berechnen und Ablauf verstehen.</p>
+            <a href="#rechner">Rate berechnen →</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="photo-ph" role="img" aria-label="Platzhalterfoto: Werkstatt in Kassel"><span>Foto: Werkstatt Kassel</span></div>
+          <div class="card-body">
+            <h3>Werkstatt</h3>
+            <p>Termin online buchen, Status selbst abfragen.</p>
+            <a href="#werkstatt">Termin wählen →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="shop" class="section-tint" aria-labelledby="shop-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Räder vor Ort</span>
+        <h2 class="h2" id="shop-heading">Verfügbarkeit in Kassel und Göttingen</h2>
+        <p class="lead">Die Anzeige des aktuellen Bestands je Filiale folgt, sobald die Warenwirtschaft angebunden ist.</p>
+      </div>
+      <div class="shop-grid">
+        <div class="shop-location">
+          <h3>Kassel</h3>
+          <p>Aktuelle Verfügbarkeit wird ergänzt.</p>
+          <span class="placeholder-tag">Bestandsdaten fehlen</span>
+        </div>
+        <div class="shop-location">
+          <h3>Göttingen</h3>
+          <p>Aktuelle Verfügbarkeit wird ergänzt.</p>
+          <span class="placeholder-tag">Bestandsdaten fehlen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="werkstatt" aria-labelledby="ws-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Werkstatt</span>
+        <h2 class="h2" id="ws-heading">Werkstatttermin buchen und Status abfragen</h2>
+      </div>
+      <div class="ws-grid">
+        <div>
+          <h3 style="font-size:19px;margin-bottom:var(--space-4)">Termin in 3 Schritten</h3>
+          <ol class="mini-steps">
+            <li><span class="mini-num">1</span><p>Standort wählen — Kassel oder Göttingen</p></li>
+            <li><span class="mini-num">2</span><p>Datum und Uhrzeit wählen</p></li>
+            <li><span class="mini-num">3</span><p>Bestätigen — Sie erhalten eine Bestätigung und eine Erinnerung</p></li>
+          </ol>
+          <a class="btn accent" href="#kontakt">Termin wählen</a>
+        </div>
+        <div>
+          <h3 style="font-size:19px;margin-bottom:var(--space-4)">Reparaturstatus abfragen</h3>
+          <div class="status-form">
+            <div class="field">
+              <label for="auftragsnummer">Auftragsnummer</label>
+              <input type="text" id="auftragsnummer" placeholder="z. B. AUF-10234">
+            </div>
+            <button type="button" class="btn secondary" id="status-check" style="align-self:flex-end">Status prüfen</button>
+          </div>
+          <div class="status-result" id="status-result" aria-live="polite">
+            <p class="form-note">Die Statusabfrage ist noch nicht mit der Werkstattplanung verbunden. Es werden keine Auftragsdaten geprüft.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section-soft" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center">
+        <span class="eyebrow">Häufige Fragen</span>
+        <h2 class="h2" id="faq-heading">Bevor Sie uns schreiben</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Wie schnell bekomme ich eine Rückmeldung auf meine Arbeitgeber-Anfrage?
+            <svg class="icon chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg>
+          </summary>
+          <p class="answer">Nach Anbindung des Kontaktformulars soll eine Eingangsbestätigung versendet werden. Die Kontaktdaten des B2B-Vertriebs werden noch ergänzt.</p>
+        </details>
+        <details>
+          <summary>Woher stammen die Werte im Leasing-Rechner?
+            <svg class="icon chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg>
+          </summary>
+          <p class="answer">Die angezeigten Werte sind aktuell Platzhalter. Sobald unsere Leasingpartner die echten Konditionen liefern, ersetzen wir sie.</p>
+        </details>
+        <details>
+          <summary>Kann ich meinen Werkstatttermin an beiden Standorten buchen?
+            <svg class="icon chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg>
+          </summary>
+          <p class="answer">Die Online-Buchung für Kassel und Göttingen ist vorgesehen. Die Werkstattplanung ist noch nicht angebunden.</p>
+        </details>
+        <details>
+          <summary>Was passiert, wenn sich mein Termin verschiebt?
+            <svg class="icon chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg>
+          </summary>
+          <p class="answer">Eine Benachrichtigung vor dem Termin ist vorgesehen; der Benachrichtigungsdienst ist noch nicht angebunden.</p>
+        </details>
+        <details>
+          <summary>Wie frage ich meinen Reparaturstatus ab?
+            <svg class="icon chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg>
+          </summary>
+          <p class="answer">Die Abfrage per Auftragsnummer ist vorgesehen. Sie funktioniert, sobald die Werkstattplanung angebunden ist.</p>
+        </details>
+        <details>
+          <summary>Bietet Radwerk auch individuell gefertigte Custom-Räder an?
+            <svg class="icon chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg>
+          </summary>
+          <p class="answer">Wir weisen auf unser Custom-Angebot hin, verkaufen es aber nicht über diesen Shop.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kontakt</span>
+        <h2 class="h2" id="contact-heading">Kontakt aufnehmen</h2>
+        <p class="lead">Wählen Sie, worum es geht – dann beantworten wir Ihre Anfrage gezielt.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="fact">
+            <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M4 17c1.2-3 3.4-4.5 6-4.5S14.8 14 16 17"/></svg>
+            Kassel &amp; Göttingen<span class="placeholder-tag">Adressen folgen</span>
+          </div>
+          <div class="fact">
+            <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 4h3l2 5-2 1a9 9 0 005 5l1-2 5 2v3a2 2 0 01-2 2C9 20 2 13 2 6a2 2 0 012-2z"/></svg>
+            Telefonnummer folgt<span class="placeholder-tag">Platzhalter</span>
+          </div>
+          <p class="form-note">Das Kontaktformular ist eine Vorschau und versendet noch keine Anfrage. Der Vertriebs-Kontakt wird ergänzt.</p>
+        </div>
+        <form class="contact" id="contact-form">
+          <div class="form-row two">
+            <div class="form-field">
+              <label for="f-name">Name <span class="req">*</span></label>
+              <input type="text" id="f-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="form-field">
+              <label for="f-kontakt">E-Mail oder Telefon <span class="req">*</span></label>
+              <input type="text" id="f-kontakt" name="kontakt" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="f-kategorie">Worum geht es? <span class="req">*</span></label>
+            <select id="f-kategorie" name="kategorie" required>
+              <option value="">Bitte wählen</option>
+              <option value="b2b">B2B-Angebot für Arbeitgeber</option>
+              <option value="werkstatt">Werkstatttermin</option>
+              <option value="shop">Bestellung / Shop</option>
+              <option value="sonstiges">Sonstiges</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="f-nachricht">Nachricht</label>
+            <textarea id="f-nachricht" name="nachricht" rows="4"></textarea>
+          </div>
+          <label class="consent">
+            <input type="checkbox" required>
+            <span>Ich habe die <a href="#datenschutz">Datenschutzerklärung</a> gelesen. <span class="req">*</span></span>
+          </label>
+          <div>
+            <button type="submit" class="btn primary">Anfrage senden</button>
+          </div>
+          <div class="confirm" id="contact-confirm" role="status">
+            Das Formular ist eine Vorschau. Ihre Angaben wurden nicht versendet.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>Werkstatt Kassel</h3>
+        <address>
+          Adresse folgt<span class="placeholder-tag">Platzhalter</span><br>
+          Öffnungszeiten folgen<span class="placeholder-tag">Platzhalter</span>
+        </address>
+      </div>
+      <div>
+        <h3>Werkstatt Göttingen</h3>
+        <address>
+          Adresse folgt<span class="placeholder-tag">Platzhalter</span><br>
+          Öffnungszeiten folgen<span class="placeholder-tag">Platzhalter</span>
+        </address>
+      </div>
+      <div>
+        <h3>Kontakt</h3>
+        <p>Telefonnummer folgt<span class="placeholder-tag">Platzhalter</span></p>
+        <p>E-Mail-Adresse folgt<span class="placeholder-tag">Platzhalter</span></p>
+      </div>
+    </div>
+    <div class="legal-row">
+      <a href="#impressum">Impressum<span class="placeholder-tag">Platzhalter</span></a>
+      <a href="#datenschutz">Datenschutzerklärung<span class="placeholder-tag">Platzhalter</span></a>
+      <span>Vorschau · Inhalte und Angaben vor Veröffentlichung prüfen</span>
+    </div>
+    <div class="legal-placeholder">
+      <p id="impressum"><strong>Impressum:</strong> Rechtstext wird vor Veröffentlichung ergänzt.</p>
+      <p id="datenschutz"><strong>Datenschutz:</strong> Rechtstext wird vor Veröffentlichung ergänzt.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var audienceContent = {
+    arbeitgeber: {
+      lead: "Wir statten Ihr Team aus – und reparieren vor Ort.",
+      cta: "Angebot anfragen",
+      href: "#kontakt"
+    },
+    beschaeftigte: {
+      lead: "Berechnen Sie Ihre Monatsrate und verstehen Sie jeden Schritt.",
+      cta: "Monatsrate berechnen",
+      href: "#rechner"
+    },
+    privat: {
+      lead: "Sehen Sie, was in Kassel und Göttingen gerade verfügbar ist.",
+      cta: "Verfügbarkeit ansehen",
+      href: "#shop"
+    }
+  };
+
+  var menuToggle = document.getElementById("menu-toggle");
+  var mobileNav = document.getElementById("mobile-nav");
+  if (menuToggle && mobileNav){
+    menuToggle.addEventListener("click", function(){
+      var willOpen = mobileNav.hidden;
+      mobileNav.hidden = !willOpen;
+      menuToggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    });
+  }
+
+  var pills = document.querySelectorAll(".audience-switch .pill");
+  var heroLead = document.getElementById("hero-lead");
+  var heroPrimary = document.getElementById("hero-primary");
+
+  pills.forEach(function(pill){
+    pill.addEventListener("click", function(){
+      pills.forEach(function(p){ p.setAttribute("aria-pressed","false"); });
+      pill.setAttribute("aria-pressed","true");
+      var key = pill.getAttribute("data-audience");
+      var content = audienceContent[key];
+      if (content && heroLead && heroPrimary){
+        heroLead.textContent = content.lead;
+        heroPrimary.textContent = content.cta;
+        heroPrimary.setAttribute("href", content.href);
+      }
+    });
+  });
+
+  var radpreis = document.getElementById("radpreis");
+  var laufzeit = document.getElementById("laufzeit");
+  var radpreisOut = document.getElementById("radpreis-out");
+  var kvRadpreis = document.getElementById("kv-radpreis");
+  var kvLaufzeit = document.getElementById("kv-laufzeit");
+  var rateValue = document.getElementById("rate-value");
+
+  function formatEuro(n){
+    return n.toLocaleString("de-DE") + " €";
+  }
+
+  function updateCalc(){
+    if (!radpreis || !laufzeit) return;
+    var preis = parseInt(radpreis.value, 10);
+    var monate = parseInt(laufzeit.value, 10);
+    var monthly = Math.round((preis / monate) * 1.15);
+    radpreisOut.textContent = formatEuro(preis);
+    kvRadpreis.textContent = formatEuro(preis);
+    kvLaufzeit.textContent = monate + " Monate";
+    rateValue.textContent = formatEuro(monthly);
+  }
+  if (radpreis) radpreis.addEventListener("input", updateCalc);
+  if (laufzeit) laufzeit.addEventListener("change", updateCalc);
+
+  var statusBtn = document.getElementById("status-check");
+  var statusResult = document.getElementById("status-result");
+  if (statusBtn && statusResult){
+    statusBtn.addEventListener("click", function(){
+      statusResult.textContent =
+        "Die Statusabfrage ist in dieser Vorschau nicht verfügbar. Ihre Auftragsnummer wurde nicht geprüft.";
+    });
+  }
+
+  var form = document.getElementById("contact-form");
+  var confirm = document.getElementById("contact-confirm");
+  if (form && confirm){
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      confirm.classList.add("show");
+    });
+  }
+})();
+</script>
+</body>
+</html>
